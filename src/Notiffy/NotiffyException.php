@@ -2,7 +2,7 @@
 
 namespace Notiffy;
 
-use PHPMailer\PHPMailer\Exception;
+use Exception;
 
 class NotiffyException extends Exception {
     public function sendFailLog(Notiffy $notiffy) {

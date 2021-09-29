@@ -241,7 +241,7 @@ class Notiffy {
                 $count++;
             }
 
-            if ($fail && !$count)
+            if ($fail && ($count < count($this->admins)))
                 $this::log('Error on send fail emails.');
             elseif ($fail)
                 $this::log('Fail log sended to ' . $count . ' recipients.');

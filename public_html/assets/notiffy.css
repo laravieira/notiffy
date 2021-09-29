@@ -1,0 +1,107 @@
+@font-face {
+    font-family: 'OCR A Extended';
+    src: url('/Notiffy/assets/ocr-a-extended.ttf') format('truetype');
+}
+
+:root {
+    --color-dark:   rgba(41, 40, 86, 1);
+    --color-purple: rgba(77, 74, 140, 1);
+    --color-grey:   rgba(97, 116, 140, 1);
+    --color-text:   rgba(255, 255, 255, 0.95);
+}
+
+.light {
+    --color-light:  rgba(160, 167, 175, 1);
+    --color-white:  rgba(255, 255, 255, 0.95);
+}
+
+.dark {
+    --color-light:  rgb(67, 69, 71);
+    --color-white:  rgba(37, 37, 37, 0.95);
+}
+
+body {
+    background-color: var(--color-dark);
+    width: 100vw;
+    height: max-content;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+h1 {
+    font-family: 'OCR A Extended', sans-serif;
+    color: var(--color-text);
+    text-align: center;
+    font-size: 2.5em;
+}
+
+p {
+    margin: 10px;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--color-text);
+    text-align: center;
+    font-size: 1em;
+}
+
+a, a:visited, a:active {
+    text-decoration: none;
+    color: var(--color-grey);
+    text-align: center;
+    font-size: 1em;
+}
+
+.content {
+    margin: 10vh auto 0px auto;
+    width: 400px;
+    border-radius: 10px;
+}
+.message, .name, .email, .select, .captcha, .submit {
+    margin: 20px auto 0px auto;
+}
+.select small {
+    color: var(--color-grey);
+    margin: 3px;
+}
+.name input, .email input, select {
+    color: var(--color-text);
+    background-color: var(--color-white);
+    border-radius: 5px;
+    border: 1px solid var(--color-light);
+    width: 100%;
+    padding: 10px;
+    height: 40px;
+    font-size: 1em;
+}
+.captcha, .submit {
+    width: min-content;
+}
+.submit input {
+    font-family: 'OCR A Extended', sans-serif;
+    color: var(--color-text);
+    padding: 10px 30px;
+    border:none;
+    background-color: var(--color-purple);
+}
+.submit input:hover, .submit input::selection {
+    color: var(--color-dark);
+    background-color: var(--color-grey);   
+}
+.footer p {
+    font-size: 0.7em;
+}
+.footer-left {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+}
+.footer-right {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+}

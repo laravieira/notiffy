@@ -76,6 +76,7 @@ class UFJFNews implements NotiffyScript
             if($throw)
                 throw new NotiffyException('Throw detected in extrators.');
         }catch(NotiffyException $e) {
+            sleep(10);
             $e->sendFailLog($this->notiffy);
         }
     }

@@ -60,6 +60,7 @@ class UFJFCalendar implements NotiffyScript
             $this->notiffy->send('['.self::NAME.'] Novo caléndário acadêmico publicado.');
 
         }catch(NotiffyException $e) {
+            sleep(10);
             $e->sendFailLog($this->notiffy);
         }
     }

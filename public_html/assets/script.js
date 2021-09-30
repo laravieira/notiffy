@@ -24,18 +24,26 @@ function get(url) {
 }
 
 function populateList(newsletters) {
-    const list = document.getElementById("newsletters");
-    for (const newsletter in newsletters) {
-        const option = document.createElement("option");
+    let list = document.createElement("datalist");
+    let first = true;
+
+    for (let newsletter in newsletters) {
+        let option = document.createElement("option");
         option.setAttribute("title", newsletter.description);
         option.setAttribute("id", newsletter.id);
         option.setAttribute("value", newsletter.id);
-        option.text = newsletter.name;
+        if(first) {
+            first = false;
+            option.setAttribute('selected', 'selected');
+        }
+        option.append(newsletter.name);
 
-        list.append(option);
+        list.appendChild(option);
     }
 
-    document.getElementById("ufjfnewsletter").setAttribute('selected', 'selected');
+    let select = document.getElementById("newsletter");
+    select.appendChild(list);
+
 }
 
 // Change color scheme of recaptcha

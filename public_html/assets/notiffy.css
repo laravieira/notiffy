@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'OCR A Extended';
-    src: url('/Notiffy/assets/ocr-a-extended.ttf') format('truetype');
+    src: url('/assets/ocr-a-extended.ttf') format('truetype');
 }
 
 :root {

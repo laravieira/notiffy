@@ -19,7 +19,7 @@ class Notiffy {
     const NAME        = 'Notiffy';
     const VERSION     = '2.0.0';
     const PAGE        = 'https://notiffy.laravieira.me/';
-    const UNSUBSCRIBE = 'https://notiffy.laravieira.me/unsubscribe';
+    const UNSUBSCRIBE = 'https://notiffy.herokuapp.com/unsubscribe';
     const GITHUB      = '#';
     const TEST_MODE   = false;
     const TIMEZONE    = 'America/Sao_Paulo';

@@ -1,6 +1,3 @@
 RewriteEngine on
-
-RewriteRule ^(assets)($|/) - [L]
-RewriteCond %{SCRIPT_FILENAME} !-f
-RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteRule ^(.*)$ index.php [L,QSA]
+RewriteCond %{HTTP_HOST} ^notiffy\.herokuapp\.com$ [NC]
+RewriteRule ^(.*)$ api.php [L,QSA]

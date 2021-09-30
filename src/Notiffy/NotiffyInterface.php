@@ -25,6 +25,14 @@ class NotiffyInterface {
     }
 
     /** @throws NotiffyException */
+    public static function list(): void
+    {
+        header("Content-type: application/json; charset=UTF-8");
+        header("Access-Control-Allow-Origin: https://notiffy.laravieira.me");
+        echo json_encode(Notiffy::newsletters());
+    }
+
+    /** @throws NotiffyException */
     public static function notFound(): void
     {
         http_response_code(404);

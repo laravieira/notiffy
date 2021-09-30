@@ -27,7 +27,7 @@ function populateList(newsletters) {
     const list = document.getElementById("newsletters");
     for (const newsletter in newsletters) {
         const option = document.createElement("option");
-        option.setAttribute("title", newsletter.title);
+        option.setAttribute("title", newsletter.description);
         option.setAttribute("id", newsletter.id);
         option.setAttribute("value", newsletter.id);
         option.text = newsletter.name;

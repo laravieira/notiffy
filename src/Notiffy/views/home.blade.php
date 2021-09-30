@@ -12,7 +12,7 @@
     <meta property="og:image" content="https://notiffy.laravieira.me/assets/logo.png">
     <script src="https://www.google.com/recaptcha/enterprise.js"></script>
     <link rel="favicon" href="https://notiffy.laravieira.me/assets/logo.png">
-    <link rel="stylesheet" href="/assets/notiffy.css">
+    <link rel="stylesheet" href="https://notiffy.laravieira.me/assets/notiffy.css">
     <title>Notiffy</title>
 </head>
 <body class="light">

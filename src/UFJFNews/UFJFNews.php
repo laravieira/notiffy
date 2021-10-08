@@ -89,7 +89,7 @@ class UFJFNews implements NotiffyScript
             name:    'Gerais',
             page:    'https://www2.ufjf.br/noticias/todas-as-noticias/',
             counter: 'Geral',
-            icon:    'https://notiffy.laravieira.me/assets/Extractors/build.png',
+            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/build.png',
 
         ); $this->groups[] = new Group(
             id:      'ERE',
@@ -97,7 +97,7 @@ class UFJFNews implements NotiffyScript
             name:    'Emergencial',
             page:    'https://www2.ufjf.br/ensinoremotoemergencial/sitemap/',
             counter: 'ERE',
-            icon:    'https://notiffy.laravieira.me/assets/Extractors/covid.png',
+            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/covid.png',
 
         ); $this->groups[] = new Group(
             id:      'LIB',
@@ -105,7 +105,7 @@ class UFJFNews implements NotiffyScript
             name:    'Biblioteca',
             page:    'https://www2.ufjf.br/biblioteca/sitemap/',
             counter: 'Biblitc',
-            icon:    'https://notiffy.laravieira.me/assets/Extractors/book.png',
+            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/book.png',
 
         ); $this->groups[] = new Group(
             id:      'RU',
@@ -113,7 +113,7 @@ class UFJFNews implements NotiffyScript
             name:    'RU',
             page:    'https://www2.ufjf.br/ru/?page_id=4&sitemap',
             counter: 'RU',
-            icon:    'https://notiffy.laravieira.me/assets/Extractors/food.png',
+            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/food.png',
 
         ); $this->groups[] = new Group(
             id:      'ELT',
@@ -121,7 +121,7 @@ class UFJFNews implements NotiffyScript
             name:    'Eng. Elétrica',
             page:    'https://www.ufjf.br/engenhariaeletrica/noticias/',
             counter: 'Elétrc',
-            icon:    'https://notiffy.laravieira.me/assets/Extractors/bold.png',
+            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/bold.png',
 
         ); $this->groups[] = new Group(
             id:      'CDR',
@@ -129,7 +129,7 @@ class UFJFNews implements NotiffyScript
             name:    'CDARA',
             page:    'https://www2.ufjf.br/cdara/apresentacao/sitemap/',
             counter: 'CDARA',
-            icon:    'https://notiffy.laravieira.me/assets/Extractors/registry.png',
+            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/registry.png',
 
         );$this->groups[] = new Group(
             id:      'CONGRAD',
@@ -137,7 +137,7 @@ class UFJFNews implements NotiffyScript
             name:    'CONGRAD',
             page:    'https://www2.ufjf.br/congrad/sitemap/',
             counter: 'CONGRAD',
-            icon:    'https://notiffy.laravieira.me/assets/Extractors/hammer.png',
+            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/hammer.png',
 
         ); $this->groups[] = new Group(
             id:      'PROGRAD',
@@ -145,7 +145,7 @@ class UFJFNews implements NotiffyScript
             name:    'PROGRAD',
             page:    'https://www2.ufjf.br/prograd/sitemap/',
             counter: 'PROGRAD',
-            icon:    'https://notiffy.laravieira.me/assets/Extractors/hat.png',
+            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/hat.png',
         );
     }
 }

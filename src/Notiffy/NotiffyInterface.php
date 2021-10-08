@@ -29,7 +29,7 @@ class NotiffyInterface {
     {
         header("Content-type: application/json; charset=UTF-8");
         header("Access-Control-Allow-Origin: https://notiffy.laravieira.me");
-        echo json_encode(Notiffy::newsletters());
+        echo json_encode(array_values(Notiffy::newsletters()));
     }
 
     /** @throws NotiffyException */

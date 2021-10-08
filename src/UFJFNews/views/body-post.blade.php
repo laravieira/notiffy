@@ -7,7 +7,7 @@
         <tr style="Margin:0px;padding:0px;z-index:1;position:relative;border-spacing:0px;border-collapse:collapse;border:none;">
             @isset($post->tumbnail)
                 <td rowspan="5" style="Margin:0px;padding:0px;z-index:1;position:relative;border-spacing:0px;border-collapse:collapse;border:none;">
-                    <div style="Margin:0px;padding:0px;z-index:1;position:relative;height:135px;"><img width="239" height="135" src="{{$post->tumbnail}}" alt="tumbnail" style="Margin:0px;padding:0px;z-index:1;position:relative;"></div>
+                    <div style="Margin:0px;padding:0px;z-index:1;position:relative;height:135px;"><img width="239" height="135" src="{{$post->thumbnail}}" alt="thumbnail" style="Margin:0px;padding:0px;z-index:1;position:relative;"></div>
                 </td>                    
             @endisset
             <td rowspan="5" width="17" style="Margin:0px;padding:0px;z-index:1;position:relative;border-spacing:0px;border-collapse:collapse;border:none;"></td>

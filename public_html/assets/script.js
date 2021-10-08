@@ -6,15 +6,15 @@ function changeColorScheme(colorScheme) {
 }
 
 function get(url) {
-    const xmlhttp = new XMLHttpRequest();
+    let xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onerror = function(data) {
         console.error(data);
     }
 
-    xmlhttp.onreadystatechange = function() {
-        if(this.response !== null) {
-            populateList(this.response);
+    xmlhttp.onload = function() {
+        if(this.readyState === XMLHttpRequest.DONE) {
+            populateList(xmlhttp.responseText);
         }
     };
 
@@ -27,7 +27,7 @@ function populateList(newsletters) {
     let list = document.createElement("datalist");
     let first = true;
 
-    for (let newsletter in newsletters) {
+    newsletters.forEach(function (newsletter) {
         let option = document.createElement("option");
         option.setAttribute("title", newsletter.description);
         option.setAttribute("id", newsletter.id);
@@ -37,10 +37,8 @@ function populateList(newsletters) {
             option.setAttribute('selected', 'selected');
         }
         option.append(newsletter.name);
-
         list.appendChild(option);
-    }
-
+    });
     let select = document.getElementById("newsletter");
     select.appendChild(list);
 

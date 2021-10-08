@@ -14,7 +14,7 @@ function get(url) {
 
     xmlhttp.onload = function() {
         if(this.readyState === XMLHttpRequest.DONE) {
-            populateList(xmlhttp.responseText);
+            populateList(xmlhttp.response);
         }
     };
 

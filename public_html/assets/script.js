@@ -24,7 +24,7 @@ function get(url) {
 }
 
 function populateList(newsletters) {
-    let list = document.createElement("datalist");
+    let list = document.getElementById("newsletter");
     let first = true;
 
     newsletters.forEach(function (newsletter) {
@@ -39,9 +39,6 @@ function populateList(newsletters) {
         option.append(newsletter.name);
         list.appendChild(option);
     });
-    let select = document.getElementById("newsletter");
-    select.appendChild(list);
-
 }
 
 // Change color scheme of recaptcha

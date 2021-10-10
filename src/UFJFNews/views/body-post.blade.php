@@ -5,7 +5,7 @@
     <td style="Margin:0px;padding:0px;z-index:1;position:relative;border-spacing:0px;border-collapse:collapse;border:none;">
         <table width="600" class="post" role="presentation" style="Margin:0px;padding:0px;z-index:1;position:relative;border-spacing:0px;border-collapse:collapse;border:none;max-height:135px;background-color:#F6F6F6;">
         <tr style="Margin:0px;padding:0px;z-index:1;position:relative;border-spacing:0px;border-collapse:collapse;border:none;">
-            @isset($post->tumbnail)
+            @isset($post->thumbnail)
                 <td rowspan="5" style="Margin:0px;padding:0px;z-index:1;position:relative;border-spacing:0px;border-collapse:collapse;border:none;">
                     <div style="Margin:0px;padding:0px;z-index:1;position:relative;height:135px;"><img width="239" height="135" src="{{$post->thumbnail}}" alt="thumbnail" style="Margin:0px;padding:0px;z-index:1;position:relative;"></div>
                 </td>                    

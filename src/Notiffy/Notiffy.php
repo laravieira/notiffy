@@ -17,7 +17,7 @@ class Notiffy {
 
     // Basic
     const NAME        = 'Notiffy';
-    const VERSION     = '2.0.0';
+    const VERSION     = '2.1.0';
     const PAGE        = 'https://notiffy.laravieira.me/';
     const UNSUBSCRIBE = 'https://notiffy.herokuapp.com/unsubscribe';
     const GITHUB      = '#';

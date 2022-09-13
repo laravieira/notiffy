@@ -2,9 +2,13 @@
 
 require 'vendor/autoload.php';
 
+use Dotenv\Dotenv;
 use Mezon\Router\Router;
 use Notiffy\NotiffyException;
 use Notiffy\NotiffyInterface;
+
+Dotenv::createImmutable(__DIR__)->load();
+
 
 $router = new Router();
 $router->addRoute('/',                        [NotiffyInterface::class, 'home']);

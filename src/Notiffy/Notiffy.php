@@ -47,10 +47,10 @@ class Notiffy {
     public static function getDB(): ?PDO
     {
         if(!isset(self::$db)) {
-            $host = getenv('DB_HOST');
-            $name = getenv('DB_NAME');
-            $user = getenv('DB_USER');
-            $pass = getenv('DB_PASS');
+            $host = $_ENV['DB_HOST'];
+            $name = $_ENV['DB_NAME'];
+            $user = $_ENV['DB_USER'];
+            $pass = $_ENV['DB_PASS'];
             self::$db = new PDO("mysql:host=$host;dbname=$name", $user, $pass);
         }if(self::TEST_MODE)
             self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -206,20 +206,20 @@ class Notiffy {
         try {
             $mail = new PHPMailer();
             $mail->isSMTP();
-            $mail->Host = getenv('SMTP_HOST');
-            $mail->Port = getenv('SMTP_PORT');
+            $mail->Host = $_ENV['SMTP_HOST'];
+            $mail->Port = $_ENV['SMTP_PORT'];
             $mail->SMTPKeepAlive = true;
             $mail->SMTPAuth = true;
-            $mail->Username = getenv('SMTP_USER');
-            $mail->Password = getenv('SMTP_PASS');
+            $mail->Username = $_ENV['SMTP_USER'];
+            $mail->Password = $_ENV['SMTP_PASS'];
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
             $mail->XMailer = self::NAME . ' ' . self::VERSION;
             $mail->CharSet = self::EMAIL_CHARSET;
             $mail->Encoding = 'base64';
 
-            $mail->setFrom(getenv('SMTP_USER'), self::NAME);
-            $mail->addReplyTo(getenv('SMTP_USER'), self::NAME);
+            $mail->setFrom($_ENV['SMTP_USER'], self::NAME);
+            $mail->addReplyTo($_ENV['SMTP_USER'], self::NAME);
             $mail->isHTML(self::EMAIL_ISHTML);
 
             $count = 0;

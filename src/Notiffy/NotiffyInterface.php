@@ -44,13 +44,13 @@ class NotiffyInterface {
     {
         $path = __DIR__.'auth-recaptcha.json';
         if(!file_exists($path))
-            file_put_contents($path, getenv('RECAPTCHA_CREDENTIALS'));
+            file_put_contents($path, $_ENV['RECAPTCHA_CREDENTIALS']);
         putenv("GOOGLE_APPLICATION_CREDENTIALS=$path");
 
         $client = new RecaptchaEnterpriseServiceClient();
 
         $event = new Event();
-        $event->setSiteKey(getenv('RECAPTCHA_KEY'));
+        $event->setSiteKey($_ENV['RECAPTCHA_KEY']);
         $event->setExpectedAction(Notiffy::RECAPTCHA_PROTECTED_ACTION);
         $event->setToken($token);
 

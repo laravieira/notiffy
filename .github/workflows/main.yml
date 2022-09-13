@@ -11,9 +11,9 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
-          server: ${{ secrets.FTP_HOSTNAME }}
-          port: ${{ secrets.FTP_PORT }}
-          username: ${{ secrets.ftp_username }}
-          password: ${{ secrets.password }}
+          server: ftpupload.net
+          port: 21
+          username: epiz_32585279
+          password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ./
           dangerous-clean-slate: false

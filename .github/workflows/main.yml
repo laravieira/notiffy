@@ -1,0 +1,48 @@
+name: 🚀 Deploy website on push
+
+on:
+  push:
+    branches:
+      - webhost
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest code from notiffy/static
+        uses: actions/checkout@v2
+
+      - name: Install required packages
+        uses: php-actions/composer@v6
+        with:
+          php_version: 8.0
+
+      - name: Build environment variables file
+        uses: 1arp/create-a-file-action@0.2
+        with:
+          path: "./"
+          file: ".env"
+          content: |
+            DB_HOST=${{ secrets.NOTIFFY_DB_HOSTNAME }}
+            DB_NAME=${{ secrets.NOTIFFY_DB_NAME }}
+            DB_USER=${{ secrets.NOTIFFY_DB_USERNAME }}
+            DB_PASS=${{ secrets.NOTIFFY_DB_PASSWORD }}
+            RECAPTCHA_CREDENTIALS='${{ secrets.NOTIFFY_RECAPTCHA_CREDENTIALS }}'
+            RECAPTCHA_KEY=${{ secrets.NOTIFFY_RECAPTCHA_KEY }}
+            SMTP_HOST=${{ secrets.NOTIFFY_SMTP_HOSTNAME }}
+            SMTP_PORT=${{ secrets.NOTIFFY_SMTP_PORT }}
+            SMTP_USER=${{ secrets.NOTIFFY_SMTP_USERNAME }}
+            SMTP_PASS=${{ secrets.NOTIFFY_SMTP_PASSWORD }}
+
+      - name: Upload project to host
+        uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
+        with:
+          ftp_host: ${{ secrets.FTP_HOSTNAME }}
+          port: ${{ secrets.FTP_PORT }}
+          ftp_username: ${{ secrets.FTP_USERNAME }}
+          ftp_password: ${{ secrets.FTP_PASSWORD }}
+          local_source_dir: ./
+          dist_target_dir: ${{ secrets.FTP_SERVER_DIR }}
+          delete: true
+          exclude: "'^.htaccess' '^.gitignore' '^.idea' '^.git' '^.github' '^Procfile'"

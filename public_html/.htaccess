@@ -1,3 +1,4 @@
 RewriteEngine on
-RewriteCond %{HTTP_HOST} ^notiffy\.herokuapp\.com$ [NC]
+RewriteCond %{HTTP_HOST} ^notiffy\.laravieira\.me$ [NC]
+RewriteCond %{HTTP_HOST} ^notiffy\.000webhostapp\.com$ [NC]
 RewriteRule ^(.*)$ api.php [L,QSA]

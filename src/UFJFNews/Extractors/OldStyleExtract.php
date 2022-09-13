@@ -15,7 +15,7 @@ use function Scraping\strmpart;
 class OldStyleExtract extends StyleExtract
 {
 
-    public function savePosts(): void
+    public function savePosts()
     {
         $this->new = array();
 
@@ -47,7 +47,7 @@ class OldStyleExtract extends StyleExtract
     }
 
     /** @throws NotiffyException */
-    public function extract(int $startPage=1, int $endPage=2): ?array
+    public function extract(int $startPage=1, int $endPage=2)
     {
         $posts = array();
 
@@ -65,12 +65,12 @@ class OldStyleExtract extends StyleExtract
             $dt = explode("/", $lk);
 
             $post = new Post(
-                id:     $this->identifier.strmpart($data, 'id="', '-', '"'),
-                title:  trim(strmpart($data, '<a', '>', '</a>')),
-                design: 'O',
-                group:  $this->identifier,
-                link:   $lk,
-                date:   new DateTime("$dt[4]-$dt[5]-$dt[6]"), // Y-m-d
+                $this->identifier.strmpart($data, 'id="', '-', '"'),
+                trim(strmpart($data, '<a', '>', '</a>')),
+                'O',
+                $this->identifier,
+                $lk,
+                new DateTime("$dt[4]-$dt[5]-$dt[6]") // Y-m-d
             );
 
             if(strlen($post->id) < 2 || !isset($post) || !$post->date

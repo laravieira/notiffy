@@ -4,5 +4,5 @@ namespace Notiffy;
 
 interface NotiffyScript
 {
-    public function execute(): void;
+    public function execute();
 }

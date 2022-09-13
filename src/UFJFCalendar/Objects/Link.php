@@ -4,8 +4,14 @@ namespace UFJFCalendar\Objects;
 
 class Link {
 
+    public $url;
+    public $text;
+
     public function __construct(
-        public string $url,
-        public string $text,
-    ) {}
+        string $url,
+        string $text
+    ) {
+        $this->text = $text;
+        $this->url = $url;
+    }
 }

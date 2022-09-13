@@ -16,7 +16,7 @@ use function Scraping\strmpart;
 class NewStyleExtract extends StyleExtract
 {
     
-    public function savePosts(): void
+    public function savePosts()
     {
         $this->new = array();
         
@@ -67,7 +67,7 @@ class NewStyleExtract extends StyleExtract
     }
 
     /** @throws NotiffyException */
-    function extract(int $startPage=1, int $endPage=2): ?array
+    function extract(int $startPage=1, int $endPage=2)
     {
         if(!strpos(parent::server(), 'sitemap'))
             return $this->posts = $this->extractPosts($startPage, $endPage);
@@ -111,16 +111,16 @@ class NewStyleExtract extends StyleExtract
                 $dt = explode('/', $lk);
 
                 $post = new Post(
-                    id:     $this->identifier.$this->buildId($posts, $dt[4].$dt[5].$dt[6]),
-                    title:  trim(strmpart($data, '<a', '>', '</a>')),
-                    design: 'N',
-                    group:  $this->identifier,
-                    link:   $lk,
-                    date:   new DateTime("$dt[4]/$dt[5]/$dt[6]"), // Y-m-d
+                    $this->identifier.$this->buildId($posts, $dt[4].$dt[5].$dt[6]),
+                    trim(strmpart($data, '<a', '>', '</a>')),
+                    'N',
+                    $this->identifier,
+                    $lk,
+                    new DateTime("$dt[4]/$dt[5]/$dt[6]") // Y-m-d
                 );
 
                 $post->category = new Category(
-                    name: trim(strmpart($data, '<h6', '>', '</h6>' )),
+                    trim(strmpart($data, '<h6', '>', '</h6>' ))
                 );
 
                 if(strlen($post->id) < 2 || !isset($post) || !$post->date

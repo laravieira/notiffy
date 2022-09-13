@@ -49,4 +49,4 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e =
 });
 
 // Load newsletters list
-window.onload = get("https://notiffy.herokuapp.com/newsletters");
+window.onload = get("https://notiffy.laravieira.me/newsletters");

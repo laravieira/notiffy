@@ -8,22 +8,30 @@ use UFJFNews\Extractors\OldStyleExtract;
 use UFJFNews\Extractors\PagedStyleExtract;
 
 class Group {
-    public ?StyleExtract $extract = null;
-    public ?int $new = null;
+    public $extract = null;
+    public $new = null;
+    public $id;
+    public $name;
+    public $counter;
+    public $icon;
 
     public function __construct(
-        public string $id,
-        string  $design,
-        public string  $name,
-        string  $page,
-        public string  $counter,
-        public string  $icon,
+        string $id,
+        string $design,
+        string $name,
+        string $page,
+        string $counter,
+        string $icon
     ) {
-        $this->extract = match ($design) {
-            'M' => new MainStyleExtract($page, $id),
-            'N' => new NewStyleExtract($page, $id),
-            'P' => new PagedStyleExtract($page, $id),
-            'O' => new OldStyleExtract($page, $id),
+        $this->icon = $icon;
+        $this->counter = $counter;
+        $this->name = $name;
+        $this->id = $id;
+        switch($design) {
+            case 'M': $this->extract = new MainStyleExtract($page, $id); break;
+            case 'N': $this->extract = new NewStyleExtract($page, $id); break;
+            case 'P': $this->extract = new PagedStyleExtract($page, $id); break;
+            case 'O': $this->extract = new OldStyleExtract($page, $id); break;
         };
     }
 }

@@ -38,8 +38,8 @@ class UFJFNews implements NotiffyScript
     const MORE_APP_UFJF   = array('UFJF App',      'https://play.google.com/store/apps/details?id=br.ufjf.ufjfapp');
 
 
-    private Notiffy $notiffy;
-    private array $groups = array();
+    private $notiffy;
+    private $groups = array();
 
     public function __construct()
     {
@@ -47,7 +47,7 @@ class UFJFNews implements NotiffyScript
         $this->notiffy = new Notiffy(self::ID, self::NAME, __DIR__ . '/views');
     }
 
-    public function execute(): void
+    public function execute()
     {
         $new = 0;
         $throw = false;
@@ -81,71 +81,71 @@ class UFJFNews implements NotiffyScript
         }
     }
 
-    private function setGroups():void
+    private function setGroups()
     {
         $this->groups[] = new Group(
-            id:      'MAIN',
-            design:  'M',
-            name:    'Gerais',
-            page:    'https://www2.ufjf.br/noticias/todas-as-noticias/',
-            counter: 'Geral',
-            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/build.png',
+            'MAIN',
+            'M',
+            'Gerais',
+            'https://www2.ufjf.br/noticias/todas-as-noticias/',
+            'Geral',
+            'https://notiffy.laravieira.me/assets/ufjf_news/build.png'
 
         ); $this->groups[] = new Group(
-            id:      'ERE',
-            design:  'N',
-            name:    'Emergencial',
-            page:    'https://www2.ufjf.br/ensinoremotoemergencial/sitemap/',
-            counter: 'ERE',
-            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/covid.png',
+            'ERE',
+            'N',
+            'Emergencial',
+            'https://www2.ufjf.br/ensinoremotoemergencial/sitemap/',
+            'ERE',
+            'https://notiffy.laravieira.me/assets/ufjf_news/covid.png'
 
         ); $this->groups[] = new Group(
-            id:      'LIB',
-            design:  'N',
-            name:    'Biblioteca',
-            page:    'https://www2.ufjf.br/biblioteca/sitemap/',
-            counter: 'Biblitc',
-            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/book.png',
+            'LIB',
+            'N',
+            'Biblioteca',
+            'https://www2.ufjf.br/biblioteca/sitemap/',
+            'Biblitc',
+            'https://notiffy.laravieira.me/assets/ufjf_news/book.png'
 
         ); $this->groups[] = new Group(
-            id:      'RU',
-            design:  'P',
-            name:    'RU',
-            page:    'https://www2.ufjf.br/ru/?page_id=4&sitemap',
-            counter: 'RU',
-            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/food.png',
+            'RU',
+            'P',
+            'RU',
+            'https://www2.ufjf.br/ru/?page_id=4&sitemap',
+            'RU',
+            'https://notiffy.laravieira.me/assets/ufjf_news/food.png'
 
         ); $this->groups[] = new Group(
-            id:      'ELT',
-            design:  'O',
-            name:    'Eng. Elétrica',
-            page:    'https://www.ufjf.br/engenhariaeletrica/noticias/',
-            counter: 'Elétrc',
-            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/bold.png',
+            'ELT',
+            'O',
+            'Eng. Elétrica',
+            'https://www.ufjf.br/engenhariaeletrica/noticias/',
+            'Elétrc',
+            'https://notiffy.laravieira.me/assets/ufjf_news/bold.png'
 
         ); $this->groups[] = new Group(
-            id:      'CDR',
-            design:  'N',
-            name:    'CDARA',
-            page:    'https://www2.ufjf.br/cdara/apresentacao/sitemap/',
-            counter: 'CDARA',
-            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/registry.png',
+            'CDR',
+            'N',
+            'CDARA',
+            'https://www2.ufjf.br/cdara/apresentacao/sitemap/',
+            'CDARA',
+            'https://notiffy.laravieira.me/assets/ufjf_news/registry.png'
 
         );$this->groups[] = new Group(
-            id:      'CONGRAD',
-            design:  'N',
-            name:    'CONGRAD',
-            page:    'https://www2.ufjf.br/congrad/sitemap/',
-            counter: 'CONGRAD',
-            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/hammer.png',
+            'CONGRAD',
+            'N',
+            'CONGRAD',
+            'https://www2.ufjf.br/congrad/sitemap/',
+            'CONGRAD',
+            'https://notiffy.laravieira.me/assets/ufjf_news/hammer.png'
 
         ); $this->groups[] = new Group(
-            id:      'PROGRAD',
-            design:  'N',
-            name:    'PROGRAD',
-            page:    'https://www2.ufjf.br/prograd/sitemap/',
-            counter: 'PROGRAD',
-            icon:    'https://notiffy.laravieira.me/assets/ufjf_news/hat.png',
+            'PROGRAD',
+            'N',
+            'PROGRAD',
+            'https://www2.ufjf.br/prograd/sitemap/',
+            'PROGRAD',
+            'https://notiffy.laravieira.me/assets/ufjf_news/hat.png'
         );
     }
 }

@@ -11,7 +11,7 @@ class NotiffyException extends Exception {
             Notiffy::log($this->getFile().':'.$this->getLine(), NOTIFFY_FAIL);
             $body = $notiffy->blade->render('fail', array('logs' => Notiffy::getLogStack()));
             $notiffy->setFail(html_entity_decode($body));
-            $notiffy->send(fail: true);
+            $notiffy->send(null, true);
         } catch (NotiffyException $e) {
             echo $e->getMessage();
         }

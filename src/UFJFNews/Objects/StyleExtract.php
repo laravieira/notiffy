@@ -9,11 +9,11 @@ use UFJFNews\UFJFNews;
 
 class StyleExtract extends Scraping
 {
-    protected string  $letter;
-    protected array   $posts;
-    public    array   $new;
-    protected string  $sqlsave;
-    protected string  $identifier;
+    protected $letter;
+    protected $posts;
+    public $new;
+    protected $sqlsave;
+    protected $identifier;
 
     
     public function __construct(string $page_link, string $identifier)
@@ -38,7 +38,7 @@ class StyleExtract extends Scraping
         return !empty($this->new);
     }
 
-    public function testMode(): void
+    public function testMode()
     {
         $i = 0;
         foreach($this->posts as $post) {
@@ -62,7 +62,7 @@ class StyleExtract extends Scraping
         return $ids;
     }
 
-    public function sortByDate(): void
+    public function sortByDate()
     {
         $sort = array(); // sort DESC
         while(!empty($this->posts)) {
@@ -77,7 +77,7 @@ class StyleExtract extends Scraping
     }
 
     /** @throws NotiffyException */
-    public function validate(): void
+    public function validate()
     {
         Notiffy::log('Validating posts in knowledge base.');
 

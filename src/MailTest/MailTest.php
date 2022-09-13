@@ -10,14 +10,14 @@ use Notiffy\NotiffyScript;
 
 class MailTest implements NotiffyScript
 {
-    private Notiffy $notiffy;
+    private $notiffy;
 
     public function __construct()
     {
         $this->notiffy = new Notiffy('mailtest', 'Mail Test', __DIR__ . '/views');
     }
 
-    public function execute(): void
+    public function execute()
     {
         try {
             $body = $this->notiffy->blade->render('body');

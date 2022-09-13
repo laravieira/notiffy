@@ -90,18 +90,22 @@ class Scraping {
     const SCRAPING_VERSION = '1.0.0';
     const SCRAPING_CACHE   = '/cache';
 
-    private static string $cacheFolder = self::SCRAPING_CACHE;
-    private string $session;
+    private static $cacheFolder = Scraping::SCRAPING_CACHE;
+    private $session;
+    private $server;
+    private $userAgent = Scraping::SCRAPING_NAME . '/' . Scraping::SCRAPING_VERSION;
+    private $useSession = false;
+    private $sessionName = 'PHPSESSID';
 
     /** @throws Exception */
-    public static function cache(string $name, mixed $cache=null, string $expire=null): mixed
+    public static function cache(string $name, $cache=null, string $expire=null)
     {
         $expire = $expire ?? 'P1D'; // Expire in 1 day
 
         $file = __DIR__ . self::$cacheFolder .$name.'.json';
 
         if(!file_exists(pathinfo($file)['dirname']))
-            if(mkdir(pathinfo($file)['dirname'], recursive:true))
+            if(mkdir(pathinfo($file)['dirname'], 0777, true))
                 return null;
         
         if(isset($cache))
@@ -129,7 +133,7 @@ class Scraping {
         return self::$cacheFolder = $folder ?? self::$cacheFolder;
     }
 
-    public static function json(mixed $data, int $code=200): void
+    public static function json($data, int $code=200)
     {
         header('Content-Type: application/json');
         http_response_code($code);
@@ -154,14 +158,18 @@ class Scraping {
     }
 
     public function __construct(
-        private string $server,
-        private string $userAgent   = Scraping::SCRAPING_NAME.'/'.Scraping::SCRAPING_VERSION,
-        private bool   $useSession  = false,
-        private string $sessionName = 'PHPSESSID',
+        string $server,
+        string $userAgent   = Scraping::SCRAPING_NAME.'/'.Scraping::SCRAPING_VERSION,
+        bool   $useSession  = false,
+        string $sessionName = 'PHPSESSID'
     ) {
+        $this->sessionName = $sessionName;
+        $this->useSession = $useSession;
+        $this->userAgent = $userAgent;
+        $this->server = $server;
         if($useSession && session_status() != PHP_SESSION_ACTIVE)
             session_start();
-        self::$cacheFolder = self::SCRAPING_CACHE;
+        self::$cacheFolder = Scraping::SCRAPING_CACHE;
     }
 
     public function useSession(bool $useSession=null): bool
@@ -181,7 +189,7 @@ class Scraping {
     
     public function session(string $session=null): string
     {
-        return $this->session = $session ?? $this?->session;
+        return $this->session = $session ?? $this->session;
     }
     
     private function hasSession(): bool
@@ -321,14 +329,14 @@ function accents(string $string): string
     return strtr(utf8_decode($string), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
 }
 
-function strmstr(string $string, string $start1, string $start2, string $start3=null): bool|string
+function strmstr(string $string, string $start1, string $start2, string $start3=null)
 {
     $string = !empty($start1)?strstr($string, $start1):$string;
     $string = !empty($start2)?strstr($string, $start2):$string;
     return    !empty($start3)?strstr($string, $start3):$string;
 }
 
-function strpart(string $string, string $start=null, string $end=null, bool $keep_start=false): bool|string
+function strpart(string $string, string $start=null, string $end=null, bool $keep_start=false)
 {
     $string = !empty($start)?strstr($string, $start):$string;
     $string = (!empty($start) && !$keep_start)?substr($string, strlen($start)):$string;
@@ -336,7 +344,7 @@ function strpart(string $string, string $start=null, string $end=null, bool $kee
     return $string;
 }
 
-function strmpart(string $string, string $start1, string $start2, string $end=null, bool $keep_start=false): bool|string
+function strmpart(string $string, string $start1, string $start2, string $end=null, bool $keep_start=false)
 {
     $string = !empty($start1)?strstr($string, $start1):$string;
     $string = !empty($start2)?strstr($string, $start2):$string;

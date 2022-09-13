@@ -4,7 +4,6 @@ namespace UFJFCalendar;
 
 use DateTime;
 use Exception;
-use JetBrains\PhpStorm\Pure;
 use Notiffy\Notiffy;
 use Notiffy\NotiffyException;
 use Scraping\Scraping;
@@ -15,17 +14,17 @@ use function Scraping\strpart;
 
 class CalendarExtract extends Scraping
 {
-    public array $calendars = array();
-    public array $links = array();
-    public int   $show = 9;
-    public array $new  = array();
+    public $calendars = array();
+    public $links = array();
+    public   $show = 9;
+    public $new  = array();
 
     public function __construct()
     {
         parent::__construct('', UFJFCalendar::NAME);
     }
 
-    public function addLink(string $link): void
+    public function addLink(string $link)
     {
         $this->links[] = new Link($link, '', '');
     }
@@ -35,7 +34,7 @@ class CalendarExtract extends Scraping
         return !empty($this->new);
     }
 
-    public function testMode(): void
+    public function testMode()
     {
         $i = 0;
         foreach($this->calendars as $calendar) {
@@ -74,7 +73,7 @@ class CalendarExtract extends Scraping
         return self::check(parent::post($link, $post, $header, $headers), $headers);
     }
     
-    public function sortByDate(): void
+    public function sortByDate()
     {
         $sorted = array(); // sort DESC
         while(!empty($this->calendars)) {
@@ -107,34 +106,34 @@ class CalendarExtract extends Scraping
         return false;
     }
 
-    #[Pure] private function parseTagA(array $tags): array
+    private function parseTagA(array $tags): array
     {
         $links = array();
         foreach($tags as $tag) {
             $links[] = new Link(
-                url: strpart($tag, 'href="', '"'),
-                text: trim(strip_tags('<a'.$tag)),
+                strpart($tag, 'href="', '"'),
+                trim(strip_tags('<a'.$tag))
             );
         }
         return $links;
     }
 
-    #[Pure] private function parseTagP(array $tags): array
+    private function parseTagP(array $tags): array
     {
         $links = array();
         foreach($tags as $tag) {
             if(strpos(strpart($tag, 'href="'), 'href="'))
                 continue;
             $links[] = new Link(
-                url: strpart($tag, 'href="', '"'),
-                text: trim(strip_tags('<p'.$tag)),
+                strpart($tag, 'href="', '"'),
+                trim(strip_tags('<p'.$tag))
             );
         }
         return $links;
     }
 
     /** @throws NotiffyException */
-    private function links(string $body): void
+    private function links(string $body)
     {
         $body = strpart($body, 'class="content"', '</div>');
         $links = strip_tags($body, ['<a>', '<p>']);
@@ -148,7 +147,7 @@ class CalendarExtract extends Scraping
             throw new NotiffyException('Unable to gets links.');
     }
     
-    private function filter(string $filter): void
+    private function filter(string $filter)
     {
         $filtered = [];
         foreach($this->links as $link) {
@@ -158,7 +157,7 @@ class CalendarExtract extends Scraping
         $this->links = $filtered;
     }
     
-    private function clear(): void
+    private function clear()
     {
         // Clear main links, social links and repeted links.
         $links = array();
@@ -191,7 +190,7 @@ class CalendarExtract extends Scraping
         $this->links = $links;
     }
     
-    private function build(): void
+    private function build()
     {
         foreach($this->links as $link) {
             if(!strpos($link->url, '.pdf')
@@ -214,18 +213,18 @@ class CalendarExtract extends Scraping
                 $title = preg_match("/(19[0-9][0-9]|20[0-9][0-9])/", $text, $year)?$year[0]:date('Y');
                 $title = substr($text, 0, strpos($text, $title, stripos($text, 'Calen'))).$title;
                 $this->calendars[$url] = new Calendar(
-                    link: $url,
-                    title: trim($title),
-                    description: trim($text),
-                    type: strtoupper(substr(strrchr($url, '.'), 1)),
-                    date: $date,
+                    $url,
+                    trim($title),
+                    trim($text),
+                    strtoupper(substr(strrchr($url, '.'), 1)),
+                    $date
                 );
             }
         }
     }
 
     /** @throws NotiffyException */
-    public function extract(): void
+    public function extract()
     {
         for($i = 0; $i < count($this->links); ++$i) {
             $this->server($this->links[$i]->url);
@@ -241,7 +240,7 @@ class CalendarExtract extends Scraping
         }
     }
 
-    #[Pure] private function buildQuery(): string
+    private function buildQuery(): string
     {
         $query = '';
         foreach($this->calendars as $calendar)
@@ -250,7 +249,7 @@ class CalendarExtract extends Scraping
     }
 
     /** @throws NotiffyException */
-    public function validate(): void
+    public function validate()
     {
         try {
             Notiffy::log('Validating calendars in knowledge base.');
@@ -270,7 +269,7 @@ class CalendarExtract extends Scraping
         }
     }
 
-    public function save(): void
+    public function save()
     {
         if(Notiffy::TEST_MODE) {
             $this->testMode();

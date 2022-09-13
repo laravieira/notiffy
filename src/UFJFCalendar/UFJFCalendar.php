@@ -31,8 +31,8 @@ class UFJFCalendar implements NotiffyScript
     const MORE_APP_UFJF   = array('UFJF App',      'https://play.google.com/store/apps/details?id=br.ufjf.ufjfapp');
 
 
-    private Notiffy $notiffy;
-    private CalendarExtract $extract;
+    private $notiffy;
+    private $extract;
 
     public function __construct()
     {
@@ -43,7 +43,7 @@ class UFJFCalendar implements NotiffyScript
         $this->extract->addLink('https://www2.ufjf.br/prograd/institucional/calendarios-academicos/');
     }
 
-    public function execute(): void
+    public function execute()
     {
         try {
             $this->extract->extract();

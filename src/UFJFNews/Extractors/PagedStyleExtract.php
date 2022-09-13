@@ -15,7 +15,7 @@ use function Scraping\strmpart;
 
 class PagedStyleExtract extends StyleExtract {
     
-    public function savePosts(): void
+    public function savePosts()
     {
         $this->new = array();
         
@@ -66,7 +66,7 @@ class PagedStyleExtract extends StyleExtract {
     }
 
     /** @throws NotiffyException */
-    function extract(int $startPage=1, int $endPage=2): ?array
+    function extract(int $startPage=1, int $endPage=2)
     {
         if(!strpos(parent::server(), 'sitemap'))
             return $this->posts = $this->extractPosts($startPage, $endPage);
@@ -86,17 +86,17 @@ class PagedStyleExtract extends StyleExtract {
             foreach($posts as $ref) {
                 $dt = explode('/', trim(strmpart($ref, '</a>', '(', ')')));
                 $post = new Post(
-                    id:     $this->identifier.strpart(strpart($ref, 'href="'), '=', '"'),
-                    title:  trim(strmpart($ref, '<a', '>', '</a>')),
-                    design: 'P',
-                    group:  $this->identifier,
-                    link:   strpart($ref, 'href="', '"'),
-                    date:   new DateTime("$dt[2]/$dt[0]/$dt[1]"), // Y-m-d
+                    $this->identifier.strpart(strpart($ref, 'href="'), '=', '"'),
+                    trim(strmpart($ref, '<a', '>', '</a>')),
+                    'P',
+                    $this->identifier,
+                    strpart($ref, 'href="', '"'),
+                    new DateTime("$dt[2]/$dt[0]/$dt[1]") // Y-m-d
                 );
 
                 $post->category = new Category(
-                    name: $catname,
-                    link: empty($catlink)?null:$catlink,
+                    $catname,
+                    empty($catlink)?null:$catlink
                 );
 
                 if(strlen($post->id) < 2 || !isset($post) || !$post->date
@@ -113,7 +113,7 @@ class PagedStyleExtract extends StyleExtract {
     }
 
     /** @throws NotiffyException */
-    private function extractPosts(int $startPage=1, int $endPage=2): ?array
+    private function extractPosts(int $startPage=1, int $endPage=2)
     {
         $posts = array();
         do {
@@ -133,16 +133,16 @@ class PagedStyleExtract extends StyleExtract {
                 $dt = explode('/', $lk);
 
                 $post = new Post(
-                    id:     $this->buildId($posts, $dt[4].$dt[5].$dt[6]),
-                    title:  trim(strmpart($data, '<a', '>', '</a>')),
-                    design: 'N',
-                    group:  $this->identifier,
-                    link:   $lk,
-                    date:   new DateTime("$dt[4]/$dt[5]/$dt[6]"), // Y-m-d
+                    $this->buildId($posts, $dt[4].$dt[5].$dt[6]),
+                    trim(strmpart($data, '<a', '>', '</a>')),
+                    'N',
+                    $this->identifier,
+                    $lk,
+                    new DateTime("$dt[4]/$dt[5]/$dt[6]") // Y-m-d
                 );
 
                 $post->category = new Category(
-                    name: trim(strmpart($data, '<h6', '>', '</h6>' )),
+                    trim(strmpart($data, '<h6', '>', '</h6>' ))
                 );
 
                 if(strlen($post->id) < 2 || !isset($post) || !$post->date

@@ -16,7 +16,7 @@ use function Scraping\strmpart;
 class MainStyleExtract extends StyleExtract
 {
 
-    public function savePosts(): void
+    public function savePosts()
     {
         $this->new = array();
 
@@ -51,7 +51,7 @@ class MainStyleExtract extends StyleExtract
         }
     }
 
-    public function parseDate($s): DateTime|bool
+    public function parseDate($s)
     {
         $s = explode(" ", $s);
         switch($s[2]) {
@@ -73,7 +73,7 @@ class MainStyleExtract extends StyleExtract
     }
 
     /** @throws NotiffyException */
-    public function extract(int $startPage=1, int $endPage=2): ?array
+    public function extract(int $startPage=1, int $endPage=2)
     {
         $posts = array();
         do {
@@ -86,17 +86,17 @@ class MainStyleExtract extends StyleExtract
             foreach($response as $data) {
                 $tumbnail = strmpart($data, '<img', 'src="', '"');
                 $post = new Post(
-                    id:       $this->identifier.strmpart($data, 'id="', '-', '"'),
-                    title:    trim(strpart($data, '<h2>', '</h2>')),
-                    design:   'M',
-                    group:    $this->identifier,
-                    link:     strmpart($data, 'post-image">', 'href="', '"'),
-                    date:     $this->parseDate(trim(strmpart($data, 'post-date"', '>', "</div"))),
-                    thumbnail: empty($tumbnail)?null:$tumbnail,
+                    $this->identifier.strmpart($data, 'id="', '-', '"'),
+                    trim(strpart($data, '<h2>', '</h2>')),
+                    'M',
+                    $this->identifier,
+                    strmpart($data, 'post-image">', 'href="', '"'),
+                    $this->parseDate(trim(strmpart($data, 'post-date"', '>', "</div"))),
+                    empty($tumbnail)?null:$tumbnail
                 );
                 $post->category = new Category(
-                    name: trim(strmpart($data, 'rel="category', '>', '</a>')),
-                    link: strmpart($data, '<div class="categoria', 'href="', '"'),
+                    trim(strmpart($data, 'rel="category', '>', '</a>')),
+                    strmpart($data, '<div class="categoria', 'href="', '"')
                 );
                 
                 if(strlen($post->id) < 2 || !isset($post) || !$post->date

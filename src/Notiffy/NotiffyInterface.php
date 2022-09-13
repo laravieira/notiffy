@@ -10,9 +10,9 @@ use Google\Cloud\RecaptchaEnterprise\V1\TokenProperties\InvalidReason;
 use Jenssegers\Blade\Blade;
 
 class NotiffyInterface {
-    public static Blade $blade;
+    public static $blade;
 
-    public static function setBlade(): void
+    public static function setBlade()
     {
         self::$blade = new Blade(__DIR__ . '/views', Notiffy::BLADE_CACHE);
     }
@@ -25,7 +25,7 @@ class NotiffyInterface {
     }
 
     /** @throws NotiffyException */
-    public static function list(): void
+    public static function list()
     {
         header("Content-type: application/json; charset=UTF-8");
         header("Access-Control-Allow-Origin: https://notiffy.laravieira.me");
@@ -33,14 +33,14 @@ class NotiffyInterface {
     }
 
     /** @throws NotiffyException */
-    public static function notFound(): void
+    public static function notFound()
     {
         http_response_code(404);
         throw new NotiffyException('404 Not Found.');
     }
 
     /** @throws NotiffyException */
-    private static function reCaptcha(string $token): void
+    private static function reCaptcha(string $token)
     {
         $path = __DIR__.'auth-recaptcha.json';
         if(!file_exists($path))
@@ -76,7 +76,7 @@ class NotiffyInterface {
     }
 
     /** @throws NotiffyException */
-    public static function subscribe(): void
+    public static function subscribe()
     {
         if(empty($_POST['name']))
             throw new NotiffyException('No user name.');

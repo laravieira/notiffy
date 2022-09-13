@@ -35,16 +35,18 @@ class Notiffy {
     const EMAIL_CHARSET = 'UTF-8';
     const EMAIL_ISHTML  = true;
 
-    private static array  $logs = array();
-    private static string $nbsp;
-    private static ?PDO $db = null;
-    private array  $emails = array();
-    private array  $admins = array();
-    private string $body;
-    private string $fail;
-    public  Blade  $blade;
+    private static  $logs = array();
+    private static $nbsp;
+    private static $db = null;
+    private $emails = array();
+    private $admins = array();
+    private $body;
+    private $fail;
+    public  $blade;
+    private $newsletter;
+    private $newsletterName;
 
-    public static function getDB(): ?PDO
+    public static function getDB()
     {
         if(!isset(self::$db)) {
             $host = getenv('DB_HOST');
@@ -58,10 +60,12 @@ class Notiffy {
     }
 
     public function __construct(
-        private string $newsletter,
-        private string $newsletterName,
-        string $views,
+        string $newsletter,
+        string $newsletterName,
+        string $views
     ) {
+        $this->newsletterName = $newsletterName;
+        $this->newsletter = $newsletter;
 
         date_default_timezone_set(self::TIMEZONE);
         set_time_limit(self::TIMEOUT);
@@ -73,14 +77,14 @@ class Notiffy {
         $this->log(self::NAME.' '.self::VERSION);
         $this->log("Newsletter: $newsletter");
         if(self::TEST_MODE)
-            $this->log("TEST MODE ENABLED !!!", NOTIFFY_WARN);
-        $this->log("Time: ".(new DateTime('now'))->format(DateTimeInterface::RSS));
-        $this->log("------------------------------------");
+            $this->log('TEST MODE ENABLED !!!', NOTIFFY_WARN);
+        $this->log('Time: '.(new DateTime('now'))->format(DateTimeInterface::RSS));
+        $this->log('------------------------------------');
         
         $this->loadRecipients();
     }
 
-    public static function log($message, $type=NOTIFFY_INFO): void
+    public static function log($message, $type=NOTIFFY_INFO)
     {
         if(self::TEST_MODE)
             echo "<p style='margin: 0'>".$type.$message."</p>";
@@ -148,7 +152,7 @@ class Notiffy {
         return true;
     }
 
-    private function loadRecipients(): void
+    private function loadRecipients()
     {
         $stmt = $this::getDB()->query("SELECT name, email, `key`, admin FROM recipients WHERE newsletter='{$this->newsletter}';");
         if($stmt == false || $stmt->rowCount() < 1) {
@@ -172,17 +176,17 @@ class Notiffy {
         $this->log($stmt->rowCount().' recipients loaded.');
     }
 
-    public function setBody(string $body): void
+    public function setBody(string $body)
     {
         $this->body = $body;
     }
 
-    public function setFail(string $body): void
+    public function setFail(string $body)
     {
         $this->fail = $body;
     }
 
-    private function addUnsubscribeEmail(string &$body, string $key): array|string
+    private function addUnsubscribeEmail(string &$body, string $key)
     {
         return str_replace(self::UNSUBSCRIBE, self::UNSUBSCRIBE."/$this->newsletter/".$key, $body);
     }

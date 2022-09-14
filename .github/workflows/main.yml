@@ -36,17 +36,11 @@ jobs:
             SMTP_PASS=${{ secrets.NOTIFFY_SMTP_PASSWORD }}
 
       - name: Upload project to host
-        env:
-          LFTP_SERVER: ${{ secrets.FTP_SERVER_DIR }}
-          LFTP_HOST: ${{ secrets.FTP_HOSTNAME }}
-          LFTP_USER: ${{ secrets.FTP_USERNAME }}
-          LFTP_PASS: ${{ secrets.FTP_PASSWORD }}
-          LFTP_EXCLUDE: "^.htaccess' '^.git' '.md' '^.ftpquota' 'LICENSE' 'VERSION' '^output.log' '^DOCKER_ENV' '^docker_tag' 'logs/' 'docs/' 'doc/' 'tmp/'"
-          LFTP_ARGS: "--no-empty-dirs --delete-excluded --parallel=10 --no-perms --verbose --reverse --delete"
-          LFTP_LOCAL: "./"
-          LFTP_FLAGS: "'ftp:use-mode-z true' 'ftp:mode-z-level 9' 'net:timeout 30'"
-          LFTP_COMMAND: "$FLAGS mirror $LFTP_ARGS $EXCLUDE $LFTP_LOCAL $LFTP_FLAGS; exit 0"
-        run: |
-          for excluded in $LFTP_EXCLUDE do EXCLUDE="$EXCLUDE --exclude $excluded" done
-          for flag in $LFTP_FLAGS do FLAGS="$FLAGS set $flag;" done
-          lftp $LFTP_HOST -u $LFTP_USER,$LFTP_PASS -e "$LFTP_COMMAND"
+        uses: .github/actions/deploy-using-lftp
+        with:
+          lftp_host: ${{ secrets.FTP_HOSTNAME }}
+          lftp_user: ${{ secrets.FTP_USERNAME }}
+          lftp_pass: ${{ secrets.FTP_PASSWORD }}
+          lftp_exclude: "'^.htaccess' '^.git' '.md' '^.ftpquota' 'LICENSE' 'VERSION' '^output.log' '^DOCKER_ENV' '^docker_tag' 'logs/' 'docs/' 'doc/' 'tmp/'"
+          lftp_args: "--no-empty-dirs --delete-excluded --parallel=10 --no-perms --verbose --reverse --delete"
+          lftp_flags: "'ftp:use-mode-z true' 'ftp:mode-z-level 9' 'net:timeout 30'"

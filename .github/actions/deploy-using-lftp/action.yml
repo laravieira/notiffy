@@ -1,0 +1,36 @@
+name: "Deploy Using LFTP"
+author: "Lara Vieira"
+description: "Deploy files using FTP on GitHub actions"
+inputs:
+  lftp_host:
+    description: "FTP Hostname"
+    required: true
+  lftp_user:
+    description: "FTP Username"
+    required: true
+  lftp_pass:
+    description: "FTP Password"
+    required: true
+  lftp_flags:
+    description: "LFTP flags and its values like \"'ftp:use-mode-z true' 'ftp:mode-z-level 9' 'net:timeout 30'\""
+    required: false
+  lftp_args:
+    description: "LFTP args like \"--parallel=10 --no-perms\""
+    required: false
+  lftp_exclude:
+    description: "LFTP exclude files like \"'^.git' '.md'\""
+    required: false
+  lftp_include:
+    description: "LFTP include files like \"'^.git' '.md'\""
+    required: false
+  lftp_server_dir:
+    description: "Server folder to use"
+    required: false
+    default: './'
+  lftp_local_dir:
+    description: "Local folder to use"
+    required: false
+    default: './'
+runs:
+  using: "docker"
+  image: "Dockerfile"

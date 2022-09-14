@@ -36,7 +36,7 @@ jobs:
             SMTP_PASS=${{ secrets.NOTIFFY_SMTP_PASSWORD }}
 
       - name: Upload project to host
-        uses: .github/actions/deploy-using-lftp
+        uses: .github/actions/deploy-using-lftp@latest
         with:
           lftp_host: ${{ secrets.FTP_HOSTNAME }}
           lftp_user: ${{ secrets.FTP_USERNAME }}

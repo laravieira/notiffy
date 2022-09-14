@@ -1,4 +1,4 @@
-name: 🚀 Deploy website on push
+name: 000webhost
 
 on:
   push:
@@ -37,6 +37,10 @@ jobs:
 
       - name: Upload project to host
         uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
+        env:
+          'ftp:use-mode-z': true
+          'ftp:mode-z-level': 9
+          'net:timeout': 30
         with:
           ftp_host: ${{ secrets.FTP_HOSTNAME }}
           ftp_username: ${{ secrets.FTP_USERNAME }}
@@ -46,3 +50,4 @@ jobs:
           delete: true
           exclude: "'^.htaccess' '^.git' '.md' '^.ftpquota' 'LICENSE' 'VERSION' 'logs/' 'docs/' 'doc/' 'tmp/'"
           args: "--no-empty-dirs --delete-excluded --parallel=10"
+        continue-on-error: true

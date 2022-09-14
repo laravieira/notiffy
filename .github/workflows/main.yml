@@ -44,5 +44,5 @@ jobs:
           local_source_dir: ./
           dist_target_dir: ${{ secrets.FTP_SERVER_DIR }}
           delete: true
-          exclude: "'^.htaccess' '^.gitignore' '^.git*' '*.md' '.ftpquota' 'LICENSE' 'VERSION' 'logs/' 'docs/' 'doc/' 'tmp/'"
+          exclude: "'^.htaccess' '^.git*' '**/*\.md' '.ftpquota' 'LICENSE' 'VERSION' 'logs/' 'docs/' 'doc/' 'tmp/'"
           args: "--no-empty-dirs --delete-excluded --parallel=10"

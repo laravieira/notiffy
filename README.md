@@ -1,4 +1,4 @@
-[![000webhosting](https://github.com/laravieira/notiffy/actions/workflows/main.yml/badge.svg?branch=static&event=push)](https://github.com/laravieira/notiffy/actions/workflows/main.yml/?event=push)
+[![000webhost](https://github.com/laravieira/notiffy/actions/workflows/main.yml/badge.svg?branch=webhost)](https://github.com/laravieira/notiffy/actions/workflows/main.yml)
 
 # Notiffy
 Notiffy is a daily mail newsletter that uses PHP 8.

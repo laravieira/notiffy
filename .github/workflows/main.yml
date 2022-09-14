@@ -39,10 +39,10 @@ jobs:
         uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
         with:
           ftp_host: ${{ secrets.FTP_HOSTNAME }}
-          port: ${{ secrets.FTP_PORT }}
           ftp_username: ${{ secrets.FTP_USERNAME }}
           ftp_password: ${{ secrets.FTP_PASSWORD }}
           local_source_dir: ./
           dist_target_dir: ${{ secrets.FTP_SERVER_DIR }}
           delete: true
-          exclude: "'^.htaccess' '^.gitignore' '^.idea' '^.git' '^.github' '^Procfile'"
+          exclude: "'^.htaccess' '^.gitignore' '^.git*' '*.md' '.ftpquota' 'LICENSE' 'VERSION' 'logs/' 'docs/' 'doc/' 'tmp/'"
+          args: "--no-empty-dirs --delete-excluded --parallel=10"

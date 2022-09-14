@@ -1,4 +1,6 @@
 RewriteEngine on
-RewriteCond %{HTTP_HOST} ^notiffy\.laravieira\.me$ [NC]
-RewriteCond %{HTTP_HOST} ^notiffy\.000webhostapp\.com$ [NC]
-RewriteRule ^(.*)$ api.php [L,QSA]
+RewriteCond %{REQUEST_URI} !^/assets [NC]
+RewriteCond %{REQUEST_URI} !^/favicon\.ico$ [NC]
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+ErrorDocument 404 /index.php

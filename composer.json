@@ -27,5 +27,10 @@
       "UFJFCalendar\\": "src/UFJFCalendar/",
       "UFJFNews\\": "src/UFJFNews/"
     }
+  },
+  "config": {
+    "platform": {
+      "php": "8.0"
+    }
   }
 }

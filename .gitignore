@@ -1,3 +1,5 @@
-vendor/
-.idea/
-src/Notiffy/cache/
+/.idea
+/vendor
+/src/Notiffy/cache
+/.env
+/auth-recaptcha.json

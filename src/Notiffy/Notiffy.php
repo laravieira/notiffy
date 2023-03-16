@@ -17,10 +17,10 @@ class Notiffy {
 
     // Basic
     const NAME        = 'Notiffy';
-    const VERSION     = '2.1.0';
+    const VERSION     = '2.1.1';
     const PAGE        = 'https://notiffy.laravieira.me/';
-    const UNSUBSCRIBE = 'https://notiffy.herokuapp.com/unsubscribe';
-    const GITHUB      = '#';
+    const UNSUBSCRIBE = 'https://notiffy.laravieira.me/unsubscribe';
+    const GITHUB      = 'https://github.com/laravieira/notiffy';
     const TEST_MODE   = false;
     const TIMEZONE    = 'America/Sao_Paulo';
     const TIMEOUT     = 0;
@@ -48,10 +48,11 @@ class Notiffy {
     {
         if(!isset(self::$db)) {
             $host = getenv('DB_HOST');
+            $port = getenv('DB_PORT');
             $name = getenv('DB_NAME');
             $user = getenv('DB_USER');
             $pass = getenv('DB_PASS');
-            self::$db = new PDO("mysql:host=$host;dbname=$name", $user, $pass);
+            self::$db = new PDO("mysql:host=$host;port=$port;dbname=$name", $user, $pass);
         }if(self::TEST_MODE)
             self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return self::$db;

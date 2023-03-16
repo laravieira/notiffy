@@ -1,0 +1,11 @@
+/.github
+/.idea
+/vendor
+.gitignore
+.env
+auth-recaptcha.json
+fly.toml
+composer.lock
+Dockerfile
+LICENSE
+README.md

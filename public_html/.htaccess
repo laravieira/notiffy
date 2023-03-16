@@ -1,3 +1,4 @@
 RewriteEngine on
-RewriteCond %{HTTP_HOST} ^notiffy\.herokuapp\.com$ [NC]
-RewriteRule ^(.*)$ api.php [L,QSA]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^(.*)$ /index.php [L,QSA]
